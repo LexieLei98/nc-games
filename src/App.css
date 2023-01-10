@@ -49,3 +49,20 @@
   margin-right: 15%;
   margin-bottom: 10%;
 }
+
+#SingleReview {
+  border: solid;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 10%;
+}
+
+.nav {
+  list-style-type: none;
+}
+
+.nav li {
+  display: inline;
+  text-decoration: none;
+  padding: 15px;
+}
