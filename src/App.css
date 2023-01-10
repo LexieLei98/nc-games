@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.ReviewImg {
+  height: 50%;
+  width: 50%;
+}
+
+
+#ReviewCard {
+  border: solid;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 10%;
+}
