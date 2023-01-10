@@ -15,6 +15,9 @@ export const Nav = () => {
     return (
         <nav className="nav">
             <ul>
+            <Link to='/' key="Home">
+            <li>Home</li>
+            </Link>
             {categories.map((category)=>{
                 return (
                 <Link to={`reviews?category=${category.slug}`} key={category.slug}>
