@@ -13,18 +13,15 @@ export const Nav = () => {
     },[])
 
     return (
-        <nav className="Nav">
+        <nav className="nav">
+            <ul>
             {categories.map((category)=>{
-                return (<nav>
-                <Link to={`reviews?category=${category.slug}`}
-                className="Category_Nav"
-                key={category.slug}>
-                {category.slug}
-                </Link>
-                <span></span>
-                </nav>)
+                return (
+                <Link to={`reviews?category=${category.slug}`} key={category.slug}>
+                <li>{category.slug}</li>
+                </Link>)
             })}
-
+        </ul>
         </nav>
     )
 }
