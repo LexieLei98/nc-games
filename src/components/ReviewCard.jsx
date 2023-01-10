@@ -3,7 +3,7 @@ export default function ReviewCard ({owner,review_body, category, title, review_
     return(
         <>
         <br />
-        <Link to={`reviews/${review_id}`}
+        <Link to={`/reviews/${review_id}`}
         key={review_id}>
         <section id="ReviewCard">
             <h3><strong>{title}</strong></h3>
