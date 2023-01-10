@@ -1,13 +1,26 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import { useParams } from "react-router"
-import { getSingleReview } from "../api"
+import { getSingleReview, patchVotes } from "../api"
 import { Comments } from "./Comments"
 
 export const SingleReview = ()=> {
     const [isLoading, setIsloading] = useState(true)
     const [review, setReview] = useState([])
+    const [voteChange, setVoteChange] = useState(0)
+
     const {review_id} = useParams()
+
+    const voteChanger = (num) => {
+        setVoteChange((currVoteChange) => {
+            return (currVoteChange + num)})
+
+        patchVotes(review_id, num).catch(() =>{
+            setVoteChange((currVoteChange) => {
+                return (currVoteChange - num)})
+            console.error('Ooops something went wrong!');
+        })
+    }
 
     useEffect(()=>{
         setIsloading(true)
@@ -32,9 +45,9 @@ export const SingleReview = ()=> {
             <p>Owner: {review.owner}</p>
             <p>Designed by: {review.designer}</p>
             <p>Category: {review.category}</p>
-            <p>Votes:{review.votes}</p>
-            <button>👍</button>
-            <button>👎</button>
+            <p>Votes:{review.votes + voteChange}</p>
+            <button onClick={() => {voteChanger(1)}}>👍</button>
+            <button onClick={() => {voteChanger(-1)}}>👎</button>
             <button>Delete</button>
             <Comments/>
             
