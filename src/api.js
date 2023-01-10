@@ -17,3 +17,10 @@ export const getReviews = () => {
         return response.data.reviews
     })
 }
+
+export const getSingleReview = (review_id) =>{
+    return gameApi.get(`/reviews/${review_id}`)
+    .then((response) => {
+        return response.data.review
+    })
+}
