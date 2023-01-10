@@ -66,3 +66,10 @@
   text-decoration: none;
   padding: 15px;
 }
+
+#CommentCard {
+  border: dotted;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 10%;
+}

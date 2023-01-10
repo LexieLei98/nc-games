@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { useParams } from "react-router"
 import { getSingleReview } from "../api"
+import { Comments } from "./Comments"
 
 export const SingleReview = ()=> {
     const [isLoading, setIsloading] = useState(true)
@@ -35,6 +36,8 @@ export const SingleReview = ()=> {
             <button>👍</button>
             <button>👎</button>
             <button>Delete</button>
+            <Comments/>
+            
         </section>
         </>
     )
