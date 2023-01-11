@@ -9,21 +9,39 @@ export const Reviews = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [reviews, setReviews] = useState([])
     const categoryQuery = searchParams.get('category')
+    const [sortBy, setSortBy] = useState('title')
 
+    console.log(sortBy)
     useEffect(()=>{
         setIsloading(true)
-        getReviews(categoryQuery).then((data) => {
+        getReviews(categoryQuery, sortBy).then((data) => {
             setReviews(data)
             setIsloading(false)
         })
-    }, [categoryQuery])
+    }, [categoryQuery, sortBy])
 
     if(isLoading) {
         return <p>Loading...</p>
     }
 
     return (
-        <div>
+        <main>
+        <section>
+            <label htmlFor="selectTab" >You can sort by:  
+            <select value={sortBy}
+            key='selectTab' 
+            onChange={(e) => setSortBy(e.target.value)}>
+            <option value='title'>Title</option>
+            <option value='category'>Category</option>
+            <option value='designer'>Designer</option>
+            <option value='owner'>Owner</option>
+            <option value='created_at'>Time</option>
+            <option value='votes'>Votes</option>
+            <option value='comment_count'>Comments</option>
+            </select>
+            </label>
+        </section>
+        <section>
         {reviews.map((review) => {
             return (<ReviewCard
             className="ReviewCard"
@@ -38,6 +56,7 @@ export const Reviews = () => {
             category={review.category}
             />)
         })}
-        </div>
+        </section>
+        </main>
     )
 }

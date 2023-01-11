@@ -11,17 +11,17 @@ export const getCategories = () => {
     })
 }
 
-export const getReviews = (category) => {
-    if(category){
-        return gameApi.get(`/reviews?category=${category}`)
-        .then((response) => {
-            return response.data.reviews
-        })
+export const getReviews = (category, sortBy) => {
+    let reviewString = '/reviews'
+    if(sortBy) {
+        reviewString += `?sort_by=${sortBy}`
+        if(category) reviewString += `&&category=${category}` 
     }
-    else {return gameApi.get('/reviews')
+
+    return gameApi.get(reviewString)
     .then((response) => {
         return response.data.reviews
-    })}
+    })
 }
 
 export const getSingleReview = (review_id) =>{
