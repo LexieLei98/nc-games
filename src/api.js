@@ -49,7 +49,6 @@ export const postComment = (review_id, author, body) => {
     }
     return gameApi.post(`/reviews/${review_id}/comments`, postBody)
     .then((response) => {
-        console.log(response)
         return response.data.comments
     })
 }
