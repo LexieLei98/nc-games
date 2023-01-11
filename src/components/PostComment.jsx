@@ -16,7 +16,7 @@ export const CommentPoster = ({comments, setComments}) => {
             created_at: Date(),
             votes:0
         }
-        setComments([newComment, ...comments])
+        setComments([...comments, newComment])
 
         const results = [...comments]
         postComment(review_id, name, body)
