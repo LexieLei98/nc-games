@@ -3,10 +3,12 @@ import { useState } from "react"
 import { useParams } from "react-router"
 import { getSingleReview, patchVotes } from "../api"
 import { Comments } from "./Comments"
+import { CommentPoster } from "./PostComment"
 
 export const SingleReview = ()=> {
     const [isLoading, setIsloading] = useState(true)
     const [review, setReview] = useState([])
+    const [comments, setComments] = useState([])
     const [voteChange, setVoteChange] = useState(0)
 
     const {review_id} = useParams()
@@ -49,8 +51,8 @@ export const SingleReview = ()=> {
             <button onClick={() => {voteChanger(1)}}>👍</button>
             <button onClick={() => {voteChanger(-1)}}>👎</button>
             <button>Delete</button>
-            <Comments/>
-            
+            <Comments comments={comments} setComments={setComments}/>
+            <CommentPoster comments={comments} setComments={setComments}/>
         </section>
         </>
     )

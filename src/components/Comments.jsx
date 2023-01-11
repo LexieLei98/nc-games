@@ -4,9 +4,8 @@ import { useParams } from "react-router"
 import { getComments } from "../api"
 import CommentCard from "./CommentCard"
 
-export const Comments = () => {
+export const Comments = ({comments, setComments}) => {
     const [isLoading, setIsloading] = useState(true)
-    const[comments, setComments] = useState([])
     const {review_id} = useParams()
 
     useEffect(()=>{
