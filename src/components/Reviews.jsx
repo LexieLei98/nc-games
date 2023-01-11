@@ -10,15 +10,15 @@ export const Reviews = () => {
     const [reviews, setReviews] = useState([])
     const categoryQuery = searchParams.get('category')
     const [sortBy, setSortBy] = useState('title')
-
-    console.log(sortBy)
+    const [order, setOrder] = useState('ASC')
+    
     useEffect(()=>{
         setIsloading(true)
-        getReviews(categoryQuery, sortBy).then((data) => {
+        getReviews(categoryQuery, sortBy,order).then((data) => {
             setReviews(data)
             setIsloading(false)
         })
-    }, [categoryQuery, sortBy])
+    }, [categoryQuery, sortBy, order])
 
     if(isLoading) {
         return <p>Loading...</p>
@@ -38,6 +38,16 @@ export const Reviews = () => {
             <option value='created_at'>Time</option>
             <option value='votes'>Votes</option>
             <option value='comment_count'>Comments</option>
+            </select>
+            </label>
+        </section>
+        <section>
+            <label htmlFor="orderTab" >You can sort by:  
+            <select value={order}
+            key='orderTab' 
+            onChange={(e) => setOrder(e.target.value)}>
+            <option value='ASC'>A-Z</option>
+            <option value='DESC'>Z-A</option>
             </select>
             </label>
         </section>

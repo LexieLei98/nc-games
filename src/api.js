@@ -11,10 +11,11 @@ export const getCategories = () => {
     })
 }
 
-export const getReviews = (category, sortBy) => {
+export const getReviews = (category, sortBy, order) => {
     let reviewString = '/reviews'
     if(sortBy) {
         reviewString += `?sort_by=${sortBy}`
+        if(order) reviewString += `&&order=${order}`
         if(category) reviewString += `&&category=${category}` 
     }
 
