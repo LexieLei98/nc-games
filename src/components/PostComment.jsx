@@ -45,6 +45,7 @@ export const CommentPoster = ({comments, setComments}) => {
                 Your comments:
             <input type="text" name="author"
             key='body'
+            className="commentBody"
             value={body}
             onChange={(event) => {setBody(event.target.value)}}
             placeholder="What do you think of it?"

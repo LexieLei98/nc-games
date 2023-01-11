@@ -11,11 +11,17 @@ export const getCategories = () => {
     })
 }
 
-export const getReviews = () => {
-    return gameApi.get('/reviews')
+export const getReviews = (category) => {
+    if(category){
+        return gameApi.get(`/reviews?category=${category}`)
+        .then((response) => {
+            return response.data.reviews
+        })
+    }
+    else {return gameApi.get('/reviews')
     .then((response) => {
         return response.data.reviews
-    })
+    })}
 }
 
 export const getSingleReview = (review_id) =>{

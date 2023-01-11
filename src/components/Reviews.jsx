@@ -2,18 +2,21 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { getReviews } from "../api"
 import ReviewCard from "./ReviewCard"
+import { useSearchParams } from "react-router-dom"
 
 export const Reviews = () => {
     const [isLoading, setIsloading] = useState(true)
+    const [searchParams, setSearchParams] = useSearchParams();
     const [reviews, setReviews] = useState([])
+    const categoryQuery = searchParams.get('category')
 
     useEffect(()=>{
         setIsloading(true)
-        getReviews().then((data) => {
+        getReviews(categoryQuery).then((data) => {
             setReviews(data)
             setIsloading(false)
         })
-    }, [])
+    }, [categoryQuery])
 
     if(isLoading) {
         return <p>Loading...</p>
