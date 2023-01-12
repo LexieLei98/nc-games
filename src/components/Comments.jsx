@@ -25,15 +25,18 @@ export const Comments = ({comments, setComments}) => {
     }
     
     return(<section>
-        {comments.map((comment) => {
+        {comments.map((comment, index) => {
             return (<CommentCard 
             className='CommentCard'
             key={comment.comment_id}
             comment={comment}
+            comments={comments}
+            setComments={setComments}
             comment_id={comment.comment_id}
             body={comment.body}
             author={comment.author}
             votes={comment.votes}
+            index={index}
             created_at={comment.created_at}/>)
         })}
     </section>
