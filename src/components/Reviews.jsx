@@ -37,11 +37,11 @@ export const Reviews = () => {
         })
     }, [categoryQuery, sortBy, order])
 
-    if(error) return Error() 
+    if(error) return <Error/>
     if(isLoading) {
         return <p>Loading...</p>
     }
-    
+
     return (
         <main>
         <section>

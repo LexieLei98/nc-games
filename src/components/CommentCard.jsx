@@ -1,13 +1,10 @@
 import { useState } from "react"
 import { deleteComment } from "../api"
-import { Error } from './Error'
 
 export default function CommentCard ({index, body, author,votes, created_at,comment_id, comments, setComments}) {
     const [isLoading, setIsloading] = useState(false)
-    const [error, setError] = useState(false)
 
     const handleDelete = () => {
-        setError(false)
         const filteredComments = comments.filter((comment,i)=> i!== index)
         const originalComments = [...comments]
         setIsloading(true)
@@ -20,16 +17,12 @@ export default function CommentCard ({index, body, author,votes, created_at,comm
         })
         .catch(() => {
             setComments(originalComments)
-            setError(true)
             alert('Oops something went wrong!! Maybe try again?')
         })
     }
-
     if(isLoading) {
         return <p>Loading...</p>
     }
-
-    if(error) return Error()
 
     return (author === 'jessjelly')?
     (

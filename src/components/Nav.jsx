@@ -19,7 +19,7 @@ export const Nav = () => {
         })
     },[])
 
-    if(error) return Error();
+    if(error) return <Error/>
     
     return(
         <nav className="nav">

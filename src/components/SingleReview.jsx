@@ -37,12 +37,11 @@ export const SingleReview = ()=> {
             console.error('Ooops something went wrong!');
         })
     }
-    
+
+    if(error) return <Error/>
     if(isLoading) {
         return <p>Loading...</p>
     }
-
-    if (error) {return Error()}
 
     return(
         <>
