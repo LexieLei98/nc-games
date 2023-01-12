@@ -11,8 +11,15 @@ export const getCategories = () => {
     })
 }
 
-export const getReviews = () => {
-    return gameApi.get('/reviews')
+export const getReviews = (category, sortBy, order) => {
+    let reviewString = '/reviews'
+    if(sortBy) {
+        reviewString += `?sort_by=${sortBy}`
+        if(order) reviewString += `&&order=${order}`
+        if(category) reviewString += `&&category=${category}` 
+    }
+
+    return gameApi.get(reviewString)
     .then((response) => {
         return response.data.reviews
     })

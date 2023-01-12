@@ -2,25 +2,67 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { getReviews } from "../api"
 import ReviewCard from "./ReviewCard"
+import { useSearchParams } from "react-router-dom"
+import { useNavigate } from 'react-router-dom'
 
 export const Reviews = () => {
     const [isLoading, setIsloading] = useState(true)
+    const [searchParams, setSearchParams] = useSearchParams();
     const [reviews, setReviews] = useState([])
+    const categoryQuery = searchParams.get('category')
+    const [sortBy, setSortBy] = useState('title')
+    const [order, setOrder] = useState('ASC')
+    const navigate = useNavigate()
 
     useEffect(()=>{
         setIsloading(true)
-        getReviews().then((data) => {
+
+        let reviewString = '/reviews'
+        if(sortBy) {
+            reviewString += `?sort_by=${sortBy}`
+            if(order) reviewString += `&&order=${order}`
+            if(categoryQuery) reviewString += `&&category=${categoryQuery}` 
+        }
+
+        getReviews(categoryQuery, sortBy,order).then((data) => {
             setReviews(data)
+            navigate(reviewString)
             setIsloading(false)
         })
-    }, [])
+    }, [categoryQuery, sortBy, order])
 
     if(isLoading) {
         return <p>Loading...</p>
     }
 
     return (
-        <div>
+        <main>
+        <section>
+            <label htmlFor="selectTab" >You can sort by: 
+            <select value={sortBy}
+            key='selectTab' 
+            onChange={(e) => {setSortBy(e.target.value)}}>
+            <option value='title'>Title</option>
+            <option value='category'>Category</option>
+            <option value='designer'>Designer</option>
+            <option value='owner'>Owner</option>
+            <option value='created_at'>Time</option>
+            <option value='votes'>Votes</option>
+            <option value='comment_count'>Comments</option>
+            </select>
+            </label>
+        </section>
+        <section>
+            <label htmlFor="orderTab" > order by :
+            <select value={order}
+            key='orderTab' 
+            onChange={(e) => setOrder(e.target.value)}>
+            <option value='ASC'>Ascending </option>
+            <option value='DESC'>Descending</option>
+            </select>  
+            </label>
+        </section>
+        <section>
         {reviews.map((review) => {
             return (<ReviewCard
             className="ReviewCard"
@@ -32,9 +74,13 @@ export const Reviews = () => {
             votes={review.votes}
             review_id={review.review_id}
             owner={review.owner}
+            designer={review.designer}
             category={review.category}
+            created_at={review.created_at}
+            comment_count = {review.comment_count}
             />)
         })}
-        </div>
+        </section>
+        </main>
     )
 }

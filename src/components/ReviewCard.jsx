@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-export default function ReviewCard ({owner,review_body, category, title, review_img_url, review_id, votes}) {
+export default function ReviewCard ({owner, category, title, review_img_url, review_id, votes, designer,created_at, comment_count}) {
     return(
         <>
         <br />
@@ -7,12 +7,13 @@ export default function ReviewCard ({owner,review_body, category, title, review_
         key={review_id}>
         <section id="ReviewCard">
             <h3><strong>{title}</strong></h3>
-            {/* <p>{review_body}</p> */}
+            <p>Designed by: {designer}</p>
+            <p>Created at: {created_at}</p>
+            <p>Category: {category}</p>
             <img src={review_img_url} alt ={`a pic of ${title}`} className="ReviewImg"/>
             <p>Owner: {owner}</p>
-            <p>Category: {category}</p>
-            {/* <button>Votes:{votes}</button>
-            <button>Delete</button> */}
+            <p>Votes:{votes}</p>
+            <p>Comments: {comment_count}</p>
         </section>
         </Link>
         </>
