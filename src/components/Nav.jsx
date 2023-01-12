@@ -2,17 +2,26 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { Link } from 'react-router-dom'
 import { getCategories } from "../api"
+import { Error } from './Error'
 
 export const Nav = () => {
     const [categories, setCategories] = useState([])
+    const [error, setError ] = useState(false)
 
     useEffect(() =>{
-        getCategories().then(({categories}) => {
+        setError(false)
+        getCategories()
+        .then(({categories}) => {
             setCategories(categories)
-        });
+        })
+        .catch(() => {
+            setError(true)
+        })
     },[])
 
-    return (
+    if(error) return Error();
+    
+    return(
         <nav className="nav">
             <ul>
             <Link to='/' key="Home">
