@@ -4,14 +4,28 @@ import { useParams } from "react-router"
 import { getSingleReview, patchVotes } from "../api"
 import { Comments } from "./Comments"
 import { CommentPoster } from "./PostComment"
+import { Error } from './Error'
 
 export const SingleReview = ()=> {
     const [isLoading, setIsloading] = useState(true)
     const [review, setReview] = useState([])
     const [comments, setComments] = useState([])
     const [voteChange, setVoteChange] = useState(0)
-
     const {review_id} = useParams()
+    const [error, setError ] = useState(false)
+
+    useEffect(()=>{
+        setIsloading(true)
+        setError(false)
+        getSingleReview(review_id).then((data) => {
+            setReview(data)
+            setIsloading(false)
+        }).catch(() => {
+            setIsloading(false)
+            setError(true)
+        })
+    }, [])
+
 
     const voteChanger = (num) => {
         setVoteChange((currVoteChange) => {
@@ -24,14 +38,7 @@ export const SingleReview = ()=> {
         })
     }
 
-    useEffect(()=>{
-        setIsloading(true)
-        getSingleReview(review_id).then((data) => {
-            setReview(data)
-            setIsloading(false)
-        })
-    }, [])
-
+    if(error) return <Error/>
     if(isLoading) {
         return <p>Loading...</p>
     }

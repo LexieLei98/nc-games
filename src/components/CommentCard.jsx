@@ -5,7 +5,7 @@ export default function CommentCard ({index, body, author,votes, created_at,comm
     const [isLoading, setIsloading] = useState(false)
 
     const handleDelete = () => {
-        const filteredComments = comments.filter((item,i)=> i!== index)
+        const filteredComments = comments.filter((comment,i)=> i!== index)
         const originalComments = [...comments]
         setIsloading(true)
         setComments(filteredComments)
@@ -20,7 +20,6 @@ export default function CommentCard ({index, body, author,votes, created_at,comm
             alert('Oops something went wrong!! Maybe try again?')
         })
     }
-
     if(isLoading) {
         return <p>Loading...</p>
     }

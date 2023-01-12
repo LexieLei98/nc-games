@@ -4,9 +4,11 @@ import { getReviews } from "../api"
 import ReviewCard from "./ReviewCard"
 import { useSearchParams } from "react-router-dom"
 import { useNavigate } from 'react-router-dom'
+import { Error } from './Error'
 
 export const Reviews = () => {
     const [isLoading, setIsloading] = useState(true)
+    const [error, setError ] = useState(false)
     const [searchParams, setSearchParams] = useSearchParams();
     const [reviews, setReviews] = useState([])
     const categoryQuery = searchParams.get('category')
@@ -14,9 +16,10 @@ export const Reviews = () => {
     const [order, setOrder] = useState('ASC')
     const navigate = useNavigate()
 
+
     useEffect(()=>{
         setIsloading(true)
-
+        setError(false)
         let reviewString = '/reviews'
         if(sortBy) {
             reviewString += `?sort_by=${sortBy}`
@@ -29,8 +32,12 @@ export const Reviews = () => {
             navigate(reviewString)
             setIsloading(false)
         })
+        .catch(()=> {
+            setError(true)
+        })
     }, [categoryQuery, sortBy, order])
 
+    if(error) return <Error/>
     if(isLoading) {
         return <p>Loading...</p>
     }
