@@ -6,6 +6,7 @@ import { Reviews } from './components/Reviews';
 import { SingleReview } from './components/SingleReview'
 import { Comments } from './components/Comments';
 import { Error } from './components/Error'
+import { Users } from './components/Users';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Reviews />}/>
         <Route path='/reviews' element={<Reviews />}/>
+        <Route path='/users' element={<Users />} />
         <Route path='/reviews/:review_id' element ={<SingleReview />} />
         <Route path='/reviews/:review_id/comments' element={<Comments/>} />
         <Route path='*' element={<Error/>} />

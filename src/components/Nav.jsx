@@ -33,6 +33,9 @@ export const Nav = () => {
                 <li>{category.slug}</li>
                 </Link>)
             })}
+            <Link to='/users' key='Users'>
+            <li>Users</li>
+            </Link>
         </ul>
         </nav>
     )

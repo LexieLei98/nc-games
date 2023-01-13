@@ -11,6 +11,13 @@ export const getCategories = () => {
     })
 }
 
+export const getUsers = () => {
+    return gameApi.get('/users')
+    .then((response) => {
+        return response.data.users
+    })
+}
+
 export const getReviews = (category, sortBy, order) => {
     let reviewString = '/reviews'
     if(sortBy) {

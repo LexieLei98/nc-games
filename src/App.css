@@ -80,3 +80,10 @@ input[type=text] {
   margin: 8px 0;
   box-sizing: border-box;
 }
+
+#UserCard {
+  border: solid;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 5%;
+}
